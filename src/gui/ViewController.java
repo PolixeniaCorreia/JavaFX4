@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 
 public class ViewController {
@@ -26,13 +27,18 @@ public class ViewController {
 	@FXML
 	public void onBtSomaAction() {
 	
-		Locale.setDefault(Locale.US);
-		double n1 = Double.parseDouble(txtN1.getText());
-		double n2 = Double.parseDouble(txtN2.getText());
+		try {
+			Locale.setDefault(Locale.US);
+			double n1 = Double.parseDouble(txtN1.getText());
+			double n2 = Double.parseDouble(txtN2.getText());
+			
+			double soma = n1 + n2;
+			
+			labelResult.setText(String.format("%.2f", soma));
+		} catch (NumberFormatException e) {
+			Alerts.showAlert("ERROR", "Parse error", e.getMessage(), AlertType.ERROR);
+		}
 		
-		double soma = n1 + n2;
-		
-		labelResult.setText(String.format("%.2f", soma));
 		
 	}
 
